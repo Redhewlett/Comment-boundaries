@@ -1,30 +1,84 @@
 import React, { useState } from 'react'
 import dog from './asset/images/pexels-charles-1851164.jpg'
-import { Avatar, ScrollArea, Divider } from '@mantine/core'
+import { Avatar, ScrollArea, Divider, Modal } from '@mantine/core'
 import { comments } from './asset/comments/comments'
-//========intro=========
+import { badWords } from './asset/flag list/BadWord'
+
 function App(): React.ReactElement {
+  //========miscellaneous=========
   const [intro, setIntro] = useState<boolean>(true)
 
   function tryApp() {
     setIntro(false)
   }
-  //========intro end=========
+
+  const [opened, setOpened] = useState(false)
+
+  const [strictMode, setStrictMode] = useState<boolean>(false)
+  const [commentReviewMode, setCommentReviewMode] = useState<boolean>(false)
+
+  function handleModes(e: React.ChangeEvent<HTMLInputElement>) {
+    let checkBoxName: string = e.target.name
+    //for each check box check if one is already checked
+    if (checkBoxName === 'strictMode' && commentReviewMode === true) {
+      setCommentReviewMode(false)
+    }
+
+    if (checkBoxName === 'commentReviewMode' && strictMode === true) {
+      setStrictMode(false)
+    }
+
+    //then activate the right one
+    if (checkBoxName === 'strictMode' && strictMode === false) {
+      setStrictMode(true)
+    } else if (checkBoxName === 'strictMode' && strictMode === true) {
+      setStrictMode(false)
+    }
+
+    if (checkBoxName === 'commentReviewMode' && commentReviewMode === false) {
+      setCommentReviewMode(true)
+    } else if (checkBoxName === 'commentReviewMode' && commentReviewMode === true) {
+      setCommentReviewMode(false)
+    }
+  }
 
   //=========comment=========
   const [temporaryComment, setTemporaryComment] = useState<string>('')
   const [finalComment, setFinalComment] = useState<string>('')
-  const [isMean, setIsMean] = useState<boolean>(false)
+  const [couldBeMean, setCouldBeMean] = useState<boolean>(false)
+
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     //trimming string starting with whitespace and unnecessary white spaces
     const comment = event.target.value.replace(/\s+/g, ' ').trim()
     setTemporaryComment(comment)
   }
 
-  function postComment() {
+  function verifyComment() {
     //verify the words in the comment
+    //lower cased comment transformed into array
+    const rawComment: string = temporaryComment.toLocaleLowerCase()
+    // const commentArray: string[] = rawComment.split(' ')
+
+    //loop and stops as soon as it finds on flagged word
+    for (let i = 0; i < badWords.length; i++) {
+      if (rawComment.includes(badWords[i])) {
+        setOpened(true)
+        return setCouldBeMean(true)
+      } else {
+        setCouldBeMean(false)
+      }
+    }
     //post the comment
+    if (!couldBeMean) {
+      postComment()
+    }
+  }
+
+  function postComment() {
     setFinalComment(temporaryComment)
+    if (opened) {
+      setOpened(false)
+    }
   }
   //=========comment end=========
 
@@ -50,7 +104,9 @@ function App(): React.ReactElement {
                 <span className='w-full flex flex-wrap justify-start items-start gap-2 p-2 mb-5'>
                   <Avatar radius='xl' color='pink' />
                   <p className='w-2/3 text-lg text-left'>
-                    Our new friend: Georgie, isn't he cute? 🥰
+                    Our new friend: Georgie.
+                    <br />
+                    isn't he cute? 🥰
                     <br />
                     <br />
                     We couldn't say no when we learned that he arrived at the shelter after being abandoned
@@ -76,12 +132,39 @@ function App(): React.ReactElement {
                 ))}
               </ScrollArea>
               <Divider my='sm' />
-              <section className=' w-full flex flex-row justify-between items-end gap-2 p-2'>
+              <label className='w-full text-lg font-bold text-red-600 text-left mr-5 flex justify-start items-center gap-2 pl-2'>
+                <input type='checkbox' checked={strictMode} onChange={handleModes} name='strictMode' />
+                Strict Mode
+              </label>
+              <label className='w-full font-bold text-cyan-700 text-lg text-left flex justify-start items-center gap-2 pl-2'>
+                <input type='checkbox' checked={commentReviewMode} onChange={handleModes} name='commentReviewMode' />
+                Comment review
+              </label>
+              <section className=' w-full mt-2 flex flex-row justify-between items-end gap-2 p-2'>
                 <input className='w-2/3 p-2 rounded' placeholder='your mean comment' name='comment' onChange={handleInput} />
-                <button className='w-1/2 bg-rose-400 hover:bg-rose-500 text-white font-bold text-2xl py-1 px-4 rounded' onClick={postComment}>
+                <button className='w-1/2 bg-rose-400 hover:bg-rose-500 text-white font-bold text-2xl py-1 px-4 rounded' onClick={verifyComment}>
                   Try to bully
                 </button>
               </section>
+              <Modal
+                styles={{
+                  body: {
+                    fontSize: '1.5em',
+                    textAlign: 'center'
+                  }
+                }}
+                centered
+                overlayBlur={3}
+                overlayColor='grey'
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title='Take it easy'
+              >
+                <p>👋 Hey, your comment might be inappropriate, you should think carefully before commenting 🤔.</p>
+                <button className='w-1/2 bg-rose-400 hover:bg-rose-500 text-white font-bold text-2xl py-1 px-4 rounded' onClick={postComment}>
+                  Post anyway
+                </button>
+              </Modal>
             </div>
           </div>
         </section>
