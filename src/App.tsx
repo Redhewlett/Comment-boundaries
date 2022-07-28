@@ -206,6 +206,12 @@ function App(): React.ReactElement {
               </Modal>
             </div>
           </div>
+          <a target='_blank' rel='noreferrer' href='https://icons8.com/icon/X8Ty3tAsn7Gn/messaging'>
+            Fav icon - Messaging
+          </a>
+          <a target='_blank' rel='noreferrer' href='https://icons8.com'>
+            by Icons8
+          </a>
         </section>
       )}
     </div>
