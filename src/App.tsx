@@ -82,7 +82,7 @@ function App(): React.ReactElement {
 
   function clearInput() {
     if (commentInput.current != null) {
-      commentInput.current.value = ' '
+      commentInput.current.value = ''
     }
   }
 
@@ -98,7 +98,7 @@ function App(): React.ReactElement {
       setCouldBeMean(false)
       clearInput()
     }
-
+    //close the modal if it was oponed
     if (opened) {
       setOpened(false)
     }
