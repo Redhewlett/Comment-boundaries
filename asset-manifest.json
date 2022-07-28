@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Comment-boundaries/static/css/main.c67e5211.css",
+    "main.js": "/Comment-boundaries/static/js/main.2b10043d.js",
+    "static/media/pexels-charles-1851164.jpg": "/Comment-boundaries/static/media/pexels-charles-1851164.a78e53713ee0a97f7642.jpg",
+    "index.html": "/Comment-boundaries/index.html",
+    "main.c67e5211.css.map": "/Comment-boundaries/static/css/main.c67e5211.css.map",
+    "main.2b10043d.js.map": "/Comment-boundaries/static/js/main.2b10043d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c67e5211.css",
+    "static/js/main.2b10043d.js"
+  ]
+}
