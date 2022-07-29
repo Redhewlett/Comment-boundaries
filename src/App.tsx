@@ -106,27 +106,36 @@ function App(): React.ReactElement {
   //=========comment end=========
 
   return (
-    <div className=' w-full h-screen flex flex-col justify-center items-center'>
-      <h1 className='p-4 m-2 text-center w-1/2 text-gray-800 text-6xl'>✨Comment boundaries✨</h1>
+    <div className='w-full h-auto lg:h-screen flex flex-col justify-center items-center'>
+      <h1 className='p-2 m-1 lg:p-4 lg:m-2 text-center w-full lg:w-1/2 text-gray-800 text-2xl lg:text-6xl'>✨Comment boundaries✨</h1>
       {intro ? (
-        <div className=' w-1/2 flex flex-col p-2 gap-4 justify-center items-center'>
-          <p className='p-2 text-center  w-full text-3xl'>
+        <div className=' w-full lg:w-1/2 flex flex-col p-2 gap-4 justify-center items-center'>
+          <p className='p-2 text-center w-full text-2xl lg:text-3xl'>
             A Script that notifies your users if their comment could be <strong>harmfull </strong>to others.🤩
           </p>
-          <p className='p-2 text-center  w-full text-3xl'>For the sake of the example this is in english only.</p>
-          <button onClick={tryApp} className=' w-1/2 m-10 bg-rose-400 hover:bg-rose-500 text-white font-bold text-2xl py-2 px-4 rounded'>
+          <p className='p-2 text-center w-full text-2xl lg:text-3xl'>For the sake of the example this is in english only.</p>
+          <button
+            onClick={tryApp}
+            className='w-1/2 m-10 bg-rose-400 hover:bg-rose-500 text-white font-bold text-xl lg:text-2xl py-1 px-2 lg:py-2 lg:px-4 rounded'
+          >
             Try a being a bully
           </button>
+          <a target='_blank' rel='noreferrer' href='https://icons8.com/icon/X8Ty3tAsn7Gn/messaging'>
+            Fav icon - Messaging
+          </a>
+          <a target='_blank' rel='noreferrer' href='https://icons8.com'>
+            by Icons8
+          </a>
         </div>
       ) : (
-        <section className='w-1/2 p-4 m-2 text-center flex flex-col justify-center align-center items-center '>
-          <div className=' w-full flex flex-row justify-between shadow-xl'>
-            <img className='w-2/4 rounded-l-md' src={dog} alt='dog' />
-            <div className='w-3/5 p-4 bg-zinc-100 rounded-r-md '>
+        <section className='w-full h-full lg:w-1/2 p-2 m-1 lg:p-4 lg:m-2 text-center flex flex-row lg:flex-col justify-center align-center items-center '>
+          <div className='w-30 h-auto flex flex-col lg:flex-row gap-4 lg:gap-0 items-center lg:items-end lg:justify-between lg:shadow-xl'>
+            <img className='w-5/6 h-auto lg:w-2/4 lg:h-full rounded lg:rounded-l-md' src={dog} alt='dog' />
+            <div className='w-5/6 lg:w-3/5 p-4 bg-zinc-100 rounded-r-md'>
               <ScrollArea style={{ height: 450 }} type='never'>
-                <span className='w-full flex flex-wrap justify-start items-start gap-2 p-2 mb-5'>
+                <span className='w-full flex flex-wrap justify-start items-start gap-2 lg:p-2 mb-5'>
                   <Avatar radius='xl' color='pink' />
-                  <p className='w-2/3 text-lg text-left'>
+                  <p className='w-full lg:w-2/3 text lg:text-lg text-left '>
                     Our new friend: Georgie.
                     <br />
                     isn't he cute? 🥰
@@ -134,15 +143,15 @@ function App(): React.ReactElement {
                     <br />
                     We couldn't say no when we learned that he arrived at the shelter after being abandoned
                   </p>
-                  <p className='w-full text-lg text-left pl-11 text-pink-400 cursor-pointer'>#dog #newfriend #cutedog #rescued</p>
-                  <p className='w-full text-left pl-11 text-gray-500 text-xs'>20 min ago</p>
+                  <p className='w-full text-left lg:text-lg lg:pl-11 text-pink-400 cursor-pointer'>#dog #newfriend #cutedog #rescued</p>
+                  <p className='w-full text-left lg:pl-11  text-gray-500 text-xs'>20 min ago</p>
                 </span>
                 {finalComment.length === 0 ? (
                   ''
                 ) : (
                   <span className='w-full flex flex-row justify-between items-center gap-2 p-2 mb-3 '>
                     <Avatar radius='xl' color='yellow' />
-                    <p className='w-2/3  text-lg text-left'>{finalComment}</p>
+                    <p className='w-2/3  lg:text-lg text-left'>{finalComment}</p>
                     <p className='w-1/5 text-gray-500 text-right text-xs '>a moment ago</p>
                   </span>
                 )}
@@ -151,7 +160,7 @@ function App(): React.ReactElement {
                 ) : (
                   <span className='w-full flex flex-row justify-between items-center gap-2 p-2 mb-3 bg-gray-200'>
                     <Avatar radius='xl' color='yellow' />
-                    <p className='w-2/3  text-lg text-left'>{commentToReview}</p>
+                    <p className='w-2/3  lg:text-lg text-left'>{commentToReview}</p>
                     <p className='w-1/5 text-gray-500 text-right text-xs '>
                       <FontAwesomeIcon icon={faEyeSlash} />
                       Submited for review, only you can see it until then.
@@ -161,23 +170,26 @@ function App(): React.ReactElement {
                 {comments.map((comment, index) => (
                   <span key={index} className='w-full flex flex-row justify-between items-center gap-2 p-2 mb-3 '>
                     <Avatar radius='xl' color={comment.avatar} />
-                    <p className='w-2/3  text-lg text-left'>{comment.comment}</p>
+                    <p className='w-2/3 text-sm lg:text-lg text-left'>{comment.comment}</p>
                     <p className='w-1/5 text-gray-500 text-right text-xs '>{comment.time} min ago</p>
                   </span>
                 ))}
               </ScrollArea>
               <Divider my='sm' />
-              <label className='w-full text-lg font-bold text-red-600 text-left mr-5 flex justify-start items-center gap-2 pl-2'>
+              <label className='w-full lg:text-lg font-bold text-red-600 text-left mr-5 flex justify-start items-center gap-2 pl-2'>
                 <input type='checkbox' checked={strictMode} onChange={handleModes} name='strictMode' />
                 Strict Mode
               </label>
-              <label className='w-full font-bold text-cyan-700 text-lg text-left flex justify-start items-center gap-2 pl-2'>
+              <label className='w-full font-bold text-cyan-700 lg:text-lg text-left flex justify-start items-center gap-2 pl-2'>
                 <input type='checkbox' checked={commentReviewMode} onChange={handleModes} name='commentReviewMode' />
                 Comment review
               </label>
               <section className=' w-full mt-2 flex flex-row justify-between items-end gap-2 p-2'>
                 <input ref={commentInput} className='w-2/3 p-2 rounded' placeholder='your comment' name='comment' onChange={handleInput} />
-                <button className='w-1/2 bg-rose-400 hover:bg-rose-500 text-white font-bold text-2xl py-1 px-4 rounded' onClick={verifyComment}>
+                <button
+                  className=' w-1/4 lg:w-1/2 bg-rose-400 hover:bg-rose-500 text-white font-bold text-xs lg:text-2xl py-1 px-4 rounded'
+                  onClick={verifyComment}
+                >
                   Try to bully
                 </button>
               </section>
@@ -206,12 +218,6 @@ function App(): React.ReactElement {
               </Modal>
             </div>
           </div>
-          <a target='_blank' rel='noreferrer' href='https://icons8.com/icon/X8Ty3tAsn7Gn/messaging'>
-            Fav icon - Messaging
-          </a>
-          <a target='_blank' rel='noreferrer' href='https://icons8.com'>
-            by Icons8
-          </a>
         </section>
       )}
     </div>
