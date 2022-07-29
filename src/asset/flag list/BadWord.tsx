@@ -416,7 +416,6 @@ export const badWords: string[] = [
   'footjob',
   'frotting',
   'fuck',
-  'fck',
   'fuck buttons',
   'fuck off',
   'fucka',
