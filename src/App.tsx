@@ -130,8 +130,8 @@ function App(): React.ReactElement {
       ) : (
         <section className='w-full h-full lg:w-1/2 p-2 m-1 lg:p-4 lg:m-2 text-center flex flex-row lg:flex-col justify-center align-center items-center '>
           <div className='w-30 h-auto flex flex-col lg:flex-row gap-4 lg:gap-0 items-center lg:items-end lg:justify-between lg:shadow-xl'>
-            <img className='w-5/6 h-auto lg:w-2/4 lg:h-full rounded lg:rounded-l-md' src={dog} alt='dog' />
-            <div className='w-5/6 lg:w-3/5 p-4 bg-zinc-100 rounded-r-md'>
+            <img className='w-5/6 h-auto lg:w-2/4 lg:h-full lg:rounded-l-md' src={dog} alt='dog' />
+            <div className='w-5/6 lg:w-3/5 p-4 bg-zinc-100 lg:rounded-r-md'>
               <ScrollArea style={{ height: 450 }} type='never'>
                 <span className='w-full flex flex-wrap justify-start items-start gap-2 lg:p-2 mb-5'>
                   <Avatar radius='xl' color='pink' />
